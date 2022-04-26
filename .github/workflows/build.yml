@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           distribution: adopt
-      - name: Build with npm
+      - name: Install with npm
         run: |
           npm ci
-          node ./server.js
