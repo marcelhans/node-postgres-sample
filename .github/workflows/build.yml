@@ -1,0 +1,23 @@
+name: build-node-postgres
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [12, 16]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          distribution: adopt
+      - name: Build with npm
+        run: |
+          npm ci
+          node ./server.js
